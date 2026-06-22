@@ -1,0 +1,25 @@
+app:
+  title: "TOMMYVISION"
+  fullscreen: false
+  width: 640
+  height: 480
+
+paths:
+  simpsons: "./sample_media/simpsons"
+  library: "./sample_media/library"
+
+player:
+  command: "mpv"
+  fullscreen: true
+  extra_args:
+    - "--fs"
+    - "--really-quiet"
+
+ui:
+  background_color: "blue"
+  text_color: "white"
+  safe_margin_x: 48
+  safe_margin_y: 36
+  font_size_large: 48
+  font_size_medium: 32
+  font_size_small: 24

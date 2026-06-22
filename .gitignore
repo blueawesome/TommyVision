@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# Local media
+sample_media/**/*.mp4
+sample_media/**/*.mkv
+sample_media/**/*.avi
+sample_media/**/*.mov
+sample_media/**/*.m4v
+sample_media/**/*.mpg
+sample_media/**/*.mpeg
+
+# Logs / temp
+*.log
+tmp/
