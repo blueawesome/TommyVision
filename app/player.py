@@ -16,6 +16,16 @@ class Player:
 
     def play(self, path: Path) -> None:
         command = [self.command, *self.extra_args, str(path)]
+        self._run(command)
+
+    def play_optional(self, path: Path) -> bool:
+        try:
+            self._run([self.command, *self.extra_args, str(path)])
+        except PlaybackError:
+            return False
+        return True
+
+    def _run(self, command: list[str]) -> None:
         try:
             subprocess.run(command, check=False)
         except FileNotFoundError as exc:

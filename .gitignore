@@ -26,6 +26,15 @@ venv/
 *.ogg
 *.m4a
 
+# Optional local personality assets stay out of Git by default.
+assets/logo/*
+assets/boot/*
+assets/menu_music/*
+!assets/logo/README.md
+!assets/boot/README.md
+!assets/menu_music/README.md
+
 # Logs / temp
 *.log
 tmp/
+data/playback_state.json

@@ -24,10 +24,30 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "simpsons": "./sample_media/simpsons",
         "library": "./sample_media/library",
     },
+    "simpsons": {
+        "enabled": True,
+        "path": "./sample_media/library/TV/The Simpsons",
+    },
     "player": {
         "command": "mpv",
         "fullscreen": True,
         "extra_args": ["--fs", "--really-quiet"],
+    },
+    "startup": {
+        "play_boot_video": False,
+        "boot_video": "./assets/boot/boot.mp4",
+    },
+    "audio": {
+        "menu_music_enabled": False,
+        "menu_music_folder": "./assets/menu_music",
+        "menu_music_volume": 0.35,
+        "shuffle": True,
+    },
+    "resume": {
+        "enabled": True,
+        "state_file": "./data/playback_state.json",
+        "minimum_position_seconds": 60,
+        "completion_threshold_percent": 92,
     },
     "ui": {
         "background_color": "blue",
@@ -35,8 +55,10 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "safe_margin_x": 48,
         "safe_margin_y": 36,
         "font_size_large": 48,
-        "font_size_medium": 32,
+        "font_size_medium": 38,
         "font_size_small": 24,
+        "logo_path": "./assets/logo/tommyvision-logo.png",
+        "show_text_title_if_logo_missing": True,
     },
 }
 
@@ -62,6 +84,23 @@ def resolve_path(path_value: str | Path) -> Path:
     if path.is_absolute():
         return path
     return (PROJECT_ROOT / path).resolve()
+
+
+def library_path(config: dict[str, Any]) -> Path:
+    return resolve_path(config["paths"]["library"])
+
+
+def simpsons_path(config: dict[str, Any]) -> Path:
+    simpsons_config = config.get("simpsons", {})
+    configured_path = simpsons_config.get("path")
+    if configured_path:
+        return resolve_path(configured_path)
+
+    old_path = config.get("paths", {}).get("simpsons")
+    if old_path:
+        return resolve_path(old_path)
+
+    return resolve_path(DEFAULT_CONFIG["simpsons"]["path"])
 
 
 def _merge(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
@@ -123,4 +162,7 @@ def _coerce_value(value: str) -> Any:
     try:
         return int(value)
     except ValueError:
-        return value
+        try:
+            return float(value)
+        except ValueError:
+            return value

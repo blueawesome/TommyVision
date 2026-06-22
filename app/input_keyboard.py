@@ -17,6 +17,8 @@ KEY_ACTIONS = {
     pygame.K_h: Action.HOME,
     pygame.K_r: Action.RANDOM,
     pygame.K_q: Action.QUIT,
+    pygame.K_x: Action.STOP,
+    pygame.K_SPACE: Action.PLAY_PAUSE,
     pygame.K_a: Action.LEFT_DIAL_CCW,
     pygame.K_d: Action.LEFT_DIAL_CW,
     pygame.K_s: Action.LEFT_DIAL_PRESS,

@@ -6,7 +6,7 @@ from app.actions import Action
 class MainMenuMode:
     def __init__(self, app) -> None:
         self.app = app
-        self.items = ["SIMPSONS", "CRT LIBRARY", "RETRO GAMES"]
+        self.items = ["THE SIMPSONS", "CRT LIBRARY", "RETRO GAMES"]
         self.selected = 0
 
     def handle_action(self, action: Action) -> None:
@@ -25,4 +25,4 @@ class MainMenuMode:
             self.app.quit()
 
     def draw(self, ui) -> None:
-        ui.menu(self.app.title, self.items, self.selected, footer="ENTER: SELECT   Q/ESC: QUIT")
+        ui.menu(self.app.title, self.items, self.selected, footer="ENTER: SELECT   Q/ESC: QUIT", show_logo=True)

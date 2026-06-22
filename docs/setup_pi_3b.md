@@ -62,17 +62,16 @@ Expected Pi media layout:
 
 ```txt
 /media/crt/
-  simpsons/
-    Season 01/
-      S01E01 - Simpsons Roasting on an Open Fire.mp4
-      S01E02 - Bart the Genius.mp4
-    Season 02/
-      S02E01 - Bart Gets an F.mp4
-
   library/
     Movies/
       Movie Title.mp4
     TV/
+      The Simpsons/
+        Season 01/
+          S01E01 Simpsons Roasting on an Open Fire.mkv
+          S01E02 Bart the Genius.mkv
+        Season 02/
+          S02E01 Bart Gets an F.mkv
       Show Name/
         Episode File.mp4
     Specials/
@@ -106,8 +105,11 @@ app:
   height: 480
 
 paths:
-  simpsons: "/media/crt/simpsons"
   library: "/media/crt/library"
+
+simpsons:
+  enabled: true
+  path: "/media/crt/library/TV/The Simpsons"
 
 player:
   command: "mpv"
@@ -128,6 +130,8 @@ ui:
 
 For desktop development, keep the relative sample paths. For Pi deployment, use absolute `/media/crt` paths so the app does not depend on the launch directory.
 
+Legacy configs with `paths.simpsons` still work as a fallback when `simpsons.path` is not configured. New installs should prefer `simpsons.path` inside the main library tree so Simpsons episodes also appear naturally in CRT Library browsing.
+
 ## Run The App
 
 From the repo root:
@@ -146,6 +150,18 @@ python -m app.main
 The app should open at 640x480. Use the keyboard controls from `docs/controls.md` or `MASTER.md`. Selecting a video launches `mpv`; when `mpv` exits, TommyVision returns to the previous menu.
 
 If `mpv` is missing or a media folder is empty/missing, TommyVision should show a readable error or empty state instead of crashing.
+
+## Optional Assets
+
+Optional logo, boot video, and menu music assets can be copied into:
+
+```txt
+assets/logo/tommyvision-logo.png
+assets/boot/boot.mp4
+assets/menu_music/
+```
+
+Enable them in `config/library.yaml` with `ui.logo_path`, `startup.play_boot_video`, and `audio.menu_music_enabled`. These assets are optional; missing or invalid files should not prevent the app from launching. Menu music stops during `mpv` video playback and starts again after playback exits. Press `Q` while `mpv` is focused to quit playback and return to TommyVision.
 
 ## Composite CRT Notes
 
