@@ -8,14 +8,23 @@ venv/
 # macOS
 .DS_Store
 
-# Local media
-sample_media/**/*.mp4
-sample_media/**/*.mkv
-sample_media/**/*.avi
-sample_media/**/*.mov
-sample_media/**/*.m4v
-sample_media/**/*.mpg
-sample_media/**/*.mpeg
+# Media files should never be tracked in this repo.
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.m4v
+*.mpg
+*.mpeg
+*.wmv
+*.flv
+*.webm
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+*.m4a
 
 # Logs / temp
 *.log
